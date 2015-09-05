@@ -2,6 +2,10 @@ package com.example.oberin.imagemacao;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.CountDownTimer;
 import android.os.Environment;
@@ -19,26 +23,34 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
-public class RoundActivity extends ActionBarActivity {
+public class RoundActivity extends ActionBarActivity implements SensorEventListener{
 
+
+    SensorManager sensorManager;
     // Variables for Couter
     private CountDownTimer countDownTimer;
     private boolean timerHasStarted = false;
-    private final long startTime = 30 * 1000;
-    private final long interval = 1 * 1000;
+    private final long startTime = 30000;
+    private final long interval = 1000;
     public TextView currentWordText;
     public TextView timerText;
+    public TextView sensorXText;
+    public TextView sensorYText;
+    public TextView sensorZText;
     public boolean hasFrontalCameraFlag;
     public String videoName = "/myFunVideo.mp4";
 
 
-    List<Word> Words = new ArrayList<Word>();
+    List<Word> Words = new ArrayList<>();
+    private int currentWordIndex;
     //ListView wordListView;
     DatabaseHandler dbHandler;
 
+    private static final boolean DEBUG_FLAG = true;
 
     private static final int VIDEO_CAPTURE = 101;
     public static Intent recorVideoIntent;
@@ -46,14 +58,30 @@ public class RoundActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_round);
+
+        sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        sensorManager.registerListener(this,sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),SensorManager.SENSOR_DELAY_NORMAL);
+
         Intent intent = getIntent();
 
         currentWordText = (TextView) this.findViewById(R.id.currentWord);
         timerText = (TextView) this.findViewById(R.id.timer);
+
+        sensorXText = (TextView) this.findViewById(R.id.sensorX);
+        sensorYText= (TextView) this.findViewById(R.id.sensorY);
+        sensorZText = (TextView) this.findViewById(R.id.sensorZ);
+
+
         //wordListView = (ListView) findViewById(R.id.currentWord);
         dbHandler = new DatabaseHandler(getApplicationContext());
+        dbHandler.populateTableWord();
 
+        getRandomRoundWords();
         countDownTimer = new MyCountDownTimer(startTime, interval);
+
+        setNextWordInScreen();
+
+
         this.startTimer();
         timerText.setText(timerText.getText() + String.valueOf((startTime / 1000) - 1));
         if (hasFrontalCamera()) {
@@ -70,8 +98,7 @@ public class RoundActivity extends ActionBarActivity {
             */
         }
 
-        if (dbHandler.getWordCount() != 0)
-            Words.addAll((dbHandler.getAllWords()));
+
         /*populateList();*/
 
         /*
@@ -91,6 +118,14 @@ public class RoundActivity extends ActionBarActivity {
         }*/
     }
 
+    public void getRandomRoundWords(){
+
+        if (dbHandler.getWordCount() != 0) {
+            Words.addAll((dbHandler.getAllWords()));
+            Collections.shuffle(Words);
+        }
+    }
+
     private boolean wordExists(Word word){
         String wordLocal = word.getWord();
         int wordCount = Words.size();
@@ -104,6 +139,19 @@ public class RoundActivity extends ActionBarActivity {
 
     }
 
+    private  void setNextWordInScreen(){
+
+        if (currentWordIndex <Words.size())
+            currentWordIndex++;
+        else{
+            Toast.makeText(this, "Awesome!!! You completed the round. Easy champ, we're almost out of words. =D",
+                    Toast.LENGTH_LONG).show();
+            Intent callMain = new Intent(RoundActivity.this, MainActivity.class);
+            startActivityForResult(callMain, 1);
+        }
+
+        currentWordText.setText(Words.get(currentWordIndex).getWord());
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -141,6 +189,39 @@ public class RoundActivity extends ActionBarActivity {
         }
     }
 
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        if(event.sensor.getType() == Sensor.TYPE_ACCELEROMETER){
+            float sensorX = event.values[0];
+            float sensorY = event.values[1];
+            float sensorZ = event.values[2];
+            if (DEBUG_FLAG) {
+                sensorXText.setText(String.valueOf(sensorX));
+                sensorYText.setText(String.valueOf(sensorY));
+                sensorZText.setText(String.valueOf(sensorZ));
+            }
+            if (sensorZ < -5.0) {
+                signalCorrectGuess();
+            }
+            else if (5.0 < sensorZ) {
+                signalSkipWord();
+            }
+        }
+    }
+
+    private void signalSkipWord() {
+        setNextWordInScreen();
+    }
+
+    private void signalCorrectGuess() {
+        setNextWordInScreen();
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+    }
+
 
     public class MyCountDownTimer extends CountDownTimer {
 
@@ -150,11 +231,14 @@ public class RoundActivity extends ActionBarActivity {
 
         @Override
         public void onFinish() {
-            currentWordText.setText("");
             timerText.setText("Game Over");
             countDownTimer.cancel();
             setResult(RESULT_OK, recorVideoIntent);
             finish();
+
+            Intent callMain = new Intent(RoundActivity.this, MainActivity.class);
+            startActivityForResult(callMain, 1);
+
 
 /*
             Intent callRound = new Intent(GameActivity.this, RoundActivity.class);
@@ -206,6 +290,7 @@ public class RoundActivity extends ActionBarActivity {
         Words.add(new Word(0,word, category));
 
     }
+    /*
     private class WordListAdapter extends ArrayAdapter<Word>{
         public WordListAdapter(){
             super (RoundActivity.this,R.layout.activity_round, Words);
@@ -224,5 +309,5 @@ public class RoundActivity extends ActionBarActivity {
             return view;
         }
     }
-
+*/
 }
