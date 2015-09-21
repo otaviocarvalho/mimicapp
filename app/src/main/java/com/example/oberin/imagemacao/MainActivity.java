@@ -21,7 +21,7 @@ public class MainActivity extends ActionBarActivity {
 
         Button startBtn = (Button) findViewById(R.id.btnStart);
         Button languageBtn = (Button) findViewById(R.id.btnLanguage);
-
+        Button signupBtn = (Button) findViewById(R.id.btnSignup);
 
         languageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,6 +35,15 @@ public class MainActivity extends ActionBarActivity {
         });
 
         startBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent callGame = new Intent(MainActivity.this, GameActivity.class);
+                callGame.putExtra("msg", "");
+                startActivity(callGame);
+            }
+        });
+
+        signupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent callGame = new Intent(MainActivity.this, GameActivity.class);
