@@ -49,7 +49,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         ContentValues values = new ContentValues();
 
         values.put(KEY_WORD, word.getWord());
-        values.put(KEY_CATEGORY, word.getCategory());
+        values.put(KEY_CATEGORY, word.get_category());
 
         db.insert(TABLE_WORDS, null, values);
 
@@ -121,7 +121,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 
 
         values.put(KEY_WORD, word.getWord());
-        values.put(KEY_CATEGORY, word.getCategory());
+        values.put(KEY_CATEGORY, word.get_category());
         int rowsAffected = db.update(TABLE_WORDS,values,KEY_ID + "=?", new String[]{String.valueOf(word.getid())});
         db.close();
         return rowsAffected;
