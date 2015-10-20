@@ -9,10 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-
 public class MainActivity extends ActionBarActivity {
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,24 +17,12 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         Button startBtn = (Button) findViewById(R.id.btnStart);
-        Button languageBtn = (Button) findViewById(R.id.btnLanguage);
         Button signupBtn = (Button) findViewById(R.id.btnSignup);
-
-        languageBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent callLanguage = new Intent(MainActivity.this, SetLanguageActivity.class);
-                callLanguage.putExtra("msg", "");
-                //startActivity(callLanguage);
-                startActivityForResult(callLanguage,1);
-            }
-        });
 
         startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent callGame = new Intent(MainActivity.this, GameActivity.class);
+                Intent callGame = new Intent(MainActivity.this, MainMenuActivity.class);
                 callGame.putExtra("msg", "");
                 startActivity(callGame);
             }
@@ -46,7 +31,7 @@ public class MainActivity extends ActionBarActivity {
         signupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent callGame = new Intent(MainActivity.this, GameActivity.class);
+                Intent callGame = new Intent(MainActivity.this, MainMenuActivity.class);
                 callGame.putExtra("msg", "");
                 startActivity(callGame);
             }
