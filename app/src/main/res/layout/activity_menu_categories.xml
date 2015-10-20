@@ -16,7 +16,7 @@
         android:id="@+id/switch1"
         android:checked="false"
         android:switchPadding="15dp"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:layout_marginBottom="38dp"
         android:layout_above="@+id/switch3"
         android:layout_alignRight="@+id/switch3"
@@ -28,7 +28,7 @@
         android:id="@+id/switch2"
         android:checked="false"
         android:switchPadding="15dp"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:layout_marginBottom="48dp"
         android:layout_above="@+id/btnCategoryPlay"
         android:layout_centerHorizontal="true" />
@@ -39,7 +39,7 @@
         android:id="@+id/switch3"
         android:checked="false"
         android:switchPadding="15dp"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:layout_marginBottom="46dp"
         android:layout_above="@+id/switch2"
         android:layout_centerHorizontal="true" />

@@ -37,6 +37,15 @@ public class MainMenuActivity extends AppCompatActivity {
             }
         });
 
+        showTutorial.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent callTutorial = new Intent(MainMenuActivity.this, TutorialActivity.class);
+                //callGame.putExtra("msg", "");
+                startActivity(callTutorial);
+            }
+        });
+
         showSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
