@@ -34,6 +34,8 @@ public class RoundActivity extends ActionBarActivity implements SensorEventListe
     // Variables for Couter
     private CountDownTimer countDownTimer;
     private boolean timerHasStarted = false;
+    private boolean downMovTriggered= false;
+    private boolean upMovTriggered = false;
     private final long startTime = 30000;
     private final long interval = 1000;
     public TextView currentWordText;
@@ -85,7 +87,8 @@ public class RoundActivity extends ActionBarActivity implements SensorEventListe
         this.startTimer();
         timerText.setText(timerText.getText() + String.valueOf((startTime / 1000) - 1));
         if (hasFrontalCamera()) {
-            Toast.makeText(this, "HAS Frontal Camera",
+            if (DEBUG_FLAG)
+                Toast.makeText(this, "HAS Frontal Camera",
                     Toast.LENGTH_LONG).show();
             /*
             File mediaFile =
@@ -200,11 +203,21 @@ public class RoundActivity extends ActionBarActivity implements SensorEventListe
                 sensorYText.setText(String.valueOf(sensorY));
                 sensorZText.setText(String.valueOf(sensorZ));
             }
-            if (sensorZ < -5.0) {
+            if (sensorZ < -5.0&& !downMovTriggered) { // Movimento para baixo efetuado
+                downMovTriggered = true;
                 signalCorrectGuess();
             }
-            else if (5.0 < sensorZ) {
+
+            if (sensorZ > -5.0 && downMovTriggered) { // Celular voltou do Movimento para baixo
+                downMovTriggered = false;
+            }
+
+            if (sensorZ > 5 && !upMovTriggered) { // Movimento para cima efetuado
+                upMovTriggered = true;
                 signalSkipWord();
+            }
+            if (sensorZ < 5.0 && upMovTriggered) { // Celular voltou do Movimento para cima
+                upMovTriggered= false;
             }
         }
     }
