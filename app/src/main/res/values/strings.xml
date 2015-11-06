@@ -7,4 +7,11 @@
     <string name="title_activity_game">GameActivity</string>
     <string name="title_activity_round">RoundActivity</string>
     <string name="title_activity_utilities">UtilitiesActivity</string>
+
+
+
+    <string name="category_1">Animals</string>
+    <string name="category_2">Stars</string>
+    <string name="category_3">Movies</string>
+
 </resources>

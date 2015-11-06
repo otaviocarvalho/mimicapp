@@ -32,7 +32,10 @@
             android:label="@string/title_activity_round"
             android:screenOrientation="landscape" >
         </activity>
-
+        <activity android:name=".MainMenuActivity" >
+        </activity>
+        <activity android:name=".MenuCategories" >
+        </activity>
     </application>
 
 </manifest>
