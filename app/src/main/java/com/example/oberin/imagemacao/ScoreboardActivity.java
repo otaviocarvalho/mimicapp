@@ -29,20 +29,20 @@ public class ScoreboardActivity extends ActionBarActivity {
         buttonHome = (Button) findViewById(R.id.buttonHome);
 
         // Read points from Parcelable
-        if (getIntent().hasExtra("scoreboard")) {
-            Scoreboard curScore = getIntent().getParcelableExtra("scoreboard");
-
-            resultText.setText(curScore.getMatchResult());
-            pointsHome.setText(curScore.getPointsHome().toString());
-            pointsAway.setText(curScore.getPointsAway().toString());
-            Toast.makeText(this, "away: " + curScore.getPointsAway().toString() + " home: " + curScore.getPointsHome().toString(), Toast.LENGTH_LONG).show();
-        }
+//        if (getIntent().hasExtra("scoreboard")) {
+//            Scoreboard curScore = getIntent().getParcelableExtra("scoreboard");
+//
+//            resultText.setText(curScore.getMatchResult());
+//            pointsHome.setText(curScore.getPointsHome().toString());
+//            pointsAway.setText(curScore.getPointsAway().toString());
+//            Toast.makeText(this, "away: " + curScore.getPointsAway().toString() + " home: " + curScore.getPointsHome().toString(), Toast.LENGTH_LONG).show();
+//        }
 
         buttonHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent callHome = new Intent(ScoreboardActivity.this, MainActivity.class);
-                startActivity(callHome);
+                Intent callMainMenu = new Intent(ScoreboardActivity.this, MainMenuActivity.class);
+                startActivity(callMainMenu);
             }
         });
     }

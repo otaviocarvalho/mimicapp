@@ -48,7 +48,7 @@ public class RoundActivity extends ActionBarActivity implements SensorEventListe
     public TextView scoreHome;
     public TextView scoreAway;
 
-    private static final boolean DEBUG_FLAG = true;
+    private static final boolean DEBUG_FLAG = false;
 
     private static final int VIDEO_CAPTURE = 101;
     public static Intent recorVideoIntent;
@@ -216,12 +216,12 @@ public class RoundActivity extends ActionBarActivity implements SensorEventListe
 
     private void setNextWordInScreen(){
         if (currentWordIndex < Words.size()) {
-            Toast.makeText(this, "Home: " + curScore.getPointsHome().toString() + " Away: " + curScore.getPointsAway().toString(), Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, "Home: " + curScore.getPointsHome().toString() + " Away: " + curScore.getPointsAway().toString(), Toast.LENGTH_LONG).show();
             currentWordIndex++;
         }
         else {
-            Toast.makeText(this, "Awesome!!! You completed the round. Easy champ, we're almost out of words. =D",
-                    Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, "Awesome!!! You completed the round. Easy champ, we're almost out of words. =D",
+            //        Toast.LENGTH_LONG).show();
             //Intent callMain = new Intent(RoundActivity.this, MainActivity.class);
             //startActivityForResult(callMain, 1);
 
