@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/currentWord"
+        android:id="@+id/textResult"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:text="Word"
@@ -51,5 +51,29 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="0"
+        android:id="@+id/pointsHome"
+        android:layout_alignTop="@+id/timer"
+        android:layout_toRightOf="@+id/sensorX"
+        android:layout_toEndOf="@+id/sensorX"
+        android:textColor="#ff52ff26"
+        android:textSize="100dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="0"
+        android:id="@+id/pointsAway"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/sensorZ"
+        android:layout_alignEnd="@+id/sensorZ"
+        android:textColor="#ffff220b"
+        android:textSize="100dp" />
 
 </RelativeLayout>

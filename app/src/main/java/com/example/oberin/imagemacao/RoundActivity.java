@@ -6,22 +6,14 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.net.Uri;
 import android.os.CountDownTimer;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -29,9 +21,8 @@ import java.util.List;
 
 public class RoundActivity extends ActionBarActivity implements SensorEventListener{
 
-
     SensorManager sensorManager;
-    // Variables for Couter
+    // Variables for Counter
     private CountDownTimer countDownTimer;
     private boolean timerHasStarted = false;
     private boolean downMovTriggered= false;
@@ -46,11 +37,16 @@ public class RoundActivity extends ActionBarActivity implements SensorEventListe
     public boolean hasFrontalCameraFlag;
     public String videoName = "/myFunVideo.mp4";
 
-
+    // Word
     List<Word> Words = new ArrayList<>();
     private int currentWordIndex;
     //ListView wordListView;
     DatabaseHandler dbHandler;
+
+    // Scoreboard
+    Scoreboard curScore = new Scoreboard("home", 0, "away", 0);
+    public TextView scoreHome;
+    public TextView scoreAway;
 
     private static final boolean DEBUG_FLAG = true;
 
@@ -66,7 +62,7 @@ public class RoundActivity extends ActionBarActivity implements SensorEventListe
 
         Intent intent = getIntent();
 
-        currentWordText = (TextView) this.findViewById(R.id.currentWord);
+        currentWordText = (TextView) this.findViewById(R.id.textResult);
         timerText = (TextView) this.findViewById(R.id.timer);
 
         sensorXText = (TextView) this.findViewById(R.id.sensorX);
@@ -119,6 +115,15 @@ public class RoundActivity extends ActionBarActivity implements SensorEventListe
         {   //Action that show
             // int j = 0;
         }*/
+
+        // Scoreboard
+        scoreHome = (TextView) this.findViewById(R.id.pointsHome);
+        scoreAway = (TextView) this.findViewById(R.id.pointsHome);
+        //if (getIntent().hasExtra("scoreboard")) {
+        //    Scoreboard auxScore = getIntent().getParcelableExtra("scoreboard");
+        //    Toast.makeText(this, "Scoreboard: " + this.curScore.UserName, Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, "Scoreboard: ", Toast.LENGTH_LONG).show();
+        //}
     }
 
     public void getRandomRoundWords(){
@@ -142,19 +147,6 @@ public class RoundActivity extends ActionBarActivity implements SensorEventListe
 
     }
 
-    private  void setNextWordInScreen(){
-
-        if (currentWordIndex <Words.size())
-            currentWordIndex++;
-        else{
-            Toast.makeText(this, "Awesome!!! You completed the round. Easy champ, we're almost out of words. =D",
-                    Toast.LENGTH_LONG).show();
-            Intent callMain = new Intent(RoundActivity.this, MainActivity.class);
-            startActivityForResult(callMain, 1);
-        }
-
-        currentWordText.setText(Words.get(currentWordIndex).getWord());
-    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -222,11 +214,43 @@ public class RoundActivity extends ActionBarActivity implements SensorEventListe
         }
     }
 
+    private void setNextWordInScreen(){
+        if (currentWordIndex < Words.size()) {
+            Toast.makeText(this, "Home: " + curScore.getPointsHome().toString() + " Away: " + curScore.getPointsAway().toString(), Toast.LENGTH_LONG).show();
+            currentWordIndex++;
+        }
+        else {
+            Toast.makeText(this, "Awesome!!! You completed the round. Easy champ, we're almost out of words. =D",
+                    Toast.LENGTH_LONG).show();
+            //Intent callMain = new Intent(RoundActivity.this, MainActivity.class);
+            //startActivityForResult(callMain, 1);
+
+            Intent callScoreboard = new Intent(RoundActivity.this, ScoreboardActivity.class);
+            callScoreboard.putExtra("scoreboard", this.curScore);
+            startActivityForResult(callScoreboard, 1);
+        }
+
+        currentWordText.setText(Words.get(currentWordIndex).getWord());
+    }
+
+    private void updateScoreboard(String player) {
+        if (player.equals("home")) {
+            curScore.setPointsHome(curScore.getPointsHome() + 1);
+            scoreHome.setText(curScore.getPointsHome().toString());
+        }
+        else if (player.equals("away")) {
+            curScore.setPointsAway(curScore.getPointsAway() + 1);
+            scoreAway.setText(curScore.getPointsAway().toString());
+        }
+    }
+
     private void signalSkipWord() {
+        this.updateScoreboard("home");
         setNextWordInScreen();
     }
 
     private void signalCorrectGuess() {
+        this.updateScoreboard("away");
         setNextWordInScreen();
     }
 
@@ -234,7 +258,6 @@ public class RoundActivity extends ActionBarActivity implements SensorEventListe
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
     }
-
 
     public class MyCountDownTimer extends CountDownTimer {
 
@@ -249,9 +272,11 @@ public class RoundActivity extends ActionBarActivity implements SensorEventListe
             setResult(RESULT_OK, recorVideoIntent);
             finish();
 
-            Intent callMain = new Intent(RoundActivity.this, MainActivity.class);
-            startActivityForResult(callMain, 1);
-
+            //Intent callMain = new Intent(RoundActivity.this, MainActivity.class);
+            //startActivityForResult(callMain, 1);
+            Intent callScoreboard = new Intent(RoundActivity.this, ScoreboardActivity.class);
+            callScoreboard.putExtra("scoreboard", RoundActivity.this.curScore);
+            startActivityForResult(callScoreboard, 1);
 
 /*
             Intent callRound = new Intent(GameActivity.this, RoundActivity.class);
@@ -266,10 +291,8 @@ public class RoundActivity extends ActionBarActivity implements SensorEventListe
             timerText.setText("" + millisUntilFinished / 1000);
         }
 
-
-
-
     }
+
     public void startTimer() {
         if (!timerHasStarted) {
             countDownTimer.start();

@@ -27,7 +27,7 @@ public class GameActivity extends ActionBarActivity {
         Intent intent = getIntent();
 
 
-        currentWordText = (TextView) this.findViewById(R.id.currentWord);
+        currentWordText = (TextView) this.findViewById(R.id.textResult);
         timerText = (TextView) this.findViewById(R.id.timer);
 
         countDownTimer = new MyCountDownTimer(startTime, interval);
