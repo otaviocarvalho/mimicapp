@@ -23,40 +23,40 @@
         android:layout_height="wrap_content"
         android:text="Play with Categories"
         android:id="@+id/button_categories"
-        android:layout_below="@+id/textView2"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="71dp" />
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Play Random"
         android:id="@+id/button_random"
-        android:layout_centerVertical="true"
-        android:layout_alignRight="@+id/button_categories"
-        android:layout_alignEnd="@+id/button_categories"
+        android:layout_above="@+id/button_settings"
         android:layout_alignLeft="@+id/button_categories"
-        android:layout_alignStart="@+id/button_categories" />
+        android:layout_alignStart="@+id/button_categories"
+        android:layout_alignRight="@+id/button_categories"
+        android:layout_alignEnd="@+id/button_categories" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Settings"
         android:id="@+id/button_settings"
-        android:layout_below="@+id/button_random"
-        android:layout_alignRight="@+id/button_random"
-        android:layout_alignEnd="@+id/button_random"
+        android:layout_above="@+id/button_tutorial_screen"
         android:layout_alignLeft="@+id/button_random"
-        android:layout_alignStart="@+id/button_random" />
+        android:layout_alignStart="@+id/button_random"
+        android:layout_alignRight="@+id/button_random"
+        android:layout_alignEnd="@+id/button_random" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Show Tutorial"
-        android:id="@+id/button_tutorial"
-        android:layout_below="@+id/button_settings"
+        android:id="@+id/button_tutorial_screen"
+        android:layout_alignParentBottom="true"
         android:layout_alignLeft="@+id/button_settings"
         android:layout_alignStart="@+id/button_settings"
+        android:layout_marginBottom="60dp"
         android:layout_alignRight="@+id/button_settings"
         android:layout_alignEnd="@+id/button_settings" />
 </RelativeLayout>

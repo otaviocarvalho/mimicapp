@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+import static com.example.oberin.imagemacao.R.id.button_tutorial_screen;
+
 public class MainMenuActivity extends AppCompatActivity {
 
     @Override
@@ -17,7 +19,7 @@ public class MainMenuActivity extends AppCompatActivity {
         Button showCategories = (Button) findViewById(R.id.button_categories);
         Button playRandom = (Button) findViewById(R.id.button_random);
         Button showSettings = (Button) findViewById(R.id.button_settings);
-        Button showTutorial = (Button) findViewById(R.id.button_tutorial);
+        Button showTutorial = (Button) findViewById(R.id.button_tutorial_screen);
 
         showCategories.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,6 +50,14 @@ public class MainMenuActivity extends AppCompatActivity {
             }
         });
 
+        showTutorial.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Intent callTutorial = new ;
+                //callGame.putExtra("msg", "");
+                startActivity(new Intent(MainMenuActivity.this, TutorialActivity.class));
+            }
+        });
 
     }
 }
