@@ -84,6 +84,7 @@
       <excludeFolder url="file:///media/DADOS/Dropbox/SemestreCorrente/LabEngSW/mimicapp-lab-eng-sw/app/build/intermediates/rs" />
       <excludeFolder url="file:///media/DADOS/Dropbox/SemestreCorrente/LabEngSW/mimicapp-lab-eng-sw/app/build/intermediates/symbols" />
       <excludeFolder url="file:///media/DADOS/Dropbox/SemestreCorrente/LabEngSW/mimicapp-lab-eng-sw/app/build/outputs" />
+      <excludeFolder url="file:///media/DADOS/Dropbox/SemestreCorrente/LabEngSW/mimicapp-lab-eng-sw/app/build/tmp" />
     </content>
     <orderEntry type="jdk" jdkName="Android API 21 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />

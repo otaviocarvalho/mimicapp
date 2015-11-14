@@ -27,7 +27,7 @@ public class RoundActivity extends ActionBarActivity implements SensorEventListe
     private boolean timerHasStarted = false;
     private boolean downMovTriggered= false;
     private boolean upMovTriggered = false;
-    private final long startTime = 30000;
+    private final long startTime = 30000;//2000;
     private final long interval = 1000;
     public TextView currentWordText;
     public TextView timerText;
@@ -48,7 +48,7 @@ public class RoundActivity extends ActionBarActivity implements SensorEventListe
     public TextView scoreHome;
     public TextView scoreAway;
 
-    private static final boolean DEBUG_FLAG = true;
+    private static final boolean DEBUG_FLAG = false;
 
     private static final int VIDEO_CAPTURE = 101;
     public static Intent recorVideoIntent;
@@ -118,7 +118,7 @@ public class RoundActivity extends ActionBarActivity implements SensorEventListe
 
         // Scoreboard
         scoreHome = (TextView) this.findViewById(R.id.pointsHome);
-        scoreAway = (TextView) this.findViewById(R.id.pointsHome);
+        scoreAway = (TextView) this.findViewById(R.id.pointsAway);
         //if (getIntent().hasExtra("scoreboard")) {
         //    Scoreboard auxScore = getIntent().getParcelableExtra("scoreboard");
         //    Toast.makeText(this, "Scoreboard: " + this.curScore.UserName, Toast.LENGTH_LONG).show();
@@ -215,13 +215,13 @@ public class RoundActivity extends ActionBarActivity implements SensorEventListe
     }
 
     private void setNextWordInScreen(){
-        if (currentWordIndex < Words.size()) {
-            Toast.makeText(this, "Home: " + curScore.getPointsHome().toString() + " Away: " + curScore.getPointsAway().toString(), Toast.LENGTH_LONG).show();
+        if (currentWordIndex < Words.size()) { // No more Words Avalable
+            //Toast.makeText(this, "Home: " + curScore.getPointsHome().toString() + " Away: " + curScore.getPointsAway().toString(), Toast.LENGTH_LONG).show();
             currentWordIndex++;
         }
         else {
-            Toast.makeText(this, "Awesome!!! You completed the round. Easy champ, we're almost out of words. =D",
-                    Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, "Awesome!!! You completed the round. Easy champ, we're almost out of words. =D",
+             //       Toast.LENGTH_LONG).show();
             //Intent callMain = new Intent(RoundActivity.this, MainActivity.class);
             //startActivityForResult(callMain, 1);
 
