@@ -26,7 +26,6 @@ public class TutorialActivity extends ActionBarActivity {
         View minhaTela = findViewById(R.id.telaTutorial);
 
 
-
         playGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,16 +45,24 @@ public class TutorialActivity extends ActionBarActivity {
         });
 
         minhaTela.setOnTouchListener(new OnSwipeTouchListener(this.getApplicationContext()) {
+
+            TextView aux_pagina = (TextView) findViewById(R.id.num_pag);
+            String txt_pagina = aux_pagina.getText().toString();
+            int num_pagina  = Integer.parseInt(txt_pagina);
+
             @Override
             public void onSwipeLeft() {
-                /*Intent callTuto2 = new Intent(TutorialActivity.this, TutorialActivity2.class);
-                //callGameCategories.putExtra("msg", "");
-                startActivity(callTuto2);*/
-                renderTutorialB();
+                if(num_pagina < 4)
+                    num_pagina++;
+
+                renderTutorial(num_pagina);
             }
 
             public void onSwipeRight() {
-                renderTutorialA();
+                if(num_pagina > 1)
+                    num_pagina--;
+
+                renderTutorial(num_pagina);
             }
 
         });
@@ -63,18 +70,32 @@ public class TutorialActivity extends ActionBarActivity {
     }
 
 
-    public void renderTutorialA(){
+    public void renderTutorial(int numPag){
         TextView conteudo = (TextView) findViewById(R.id.textoTutorial);
-        conteudo.setText(
-                "O app de Mímica é uma ótima ferramenta para se divertir com a família e seus amigos e treinar seus idiomas!");
+        TextView pagina = (TextView) findViewById(R.id.num_pag);
+
+        String texto = "";
+
+        switch (numPag) {
+            case 1:
+                texto = "O app de Mímica é uma ótima ferramenta para se divertir com a família e seus amigos e treinar seus idiomas!";
+                break;
+            case 2:
+                texto = "No menu principal você pode selecionar 'Jogar com Categorias' para escolher quais os tipos de mímicas do seu jogo OU 'Jogar aleatoriamente' com todas as mímicas que o Imagem Ação oferece!";
+                break;
+            case 3:
+                texto = "Neste menu você também pode escolher o idioma do aplicativo.";
+                break;
+            case 4:
+                texto = "Durante o jogo, segure seu aparelho na testa, na orientação paisagem e gire ele para baixo para contabilizar um acerto. Para contabilizar um erro, gire para cima.";
+                break;
+        }
+
+        conteudo.setText(texto);
+        pagina.setText(String.valueOf(numPag));
     }
 
-    public void renderTutorialB(){
-        TextView conteudo = (TextView) findViewById(R.id.textoTutorial);
-        conteudo.setText("");
-        conteudo.setText(
-                "Segure seu aparelho na testa, na orientação paisagem e gire ele para baixo para contabilizar um acerto. Para contabilizar um erro, gire para cima.");
-    }
+
 
     /**
      * Detects left and right swipes across a view.
