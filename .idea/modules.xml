@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file:///media/DADOS/Dropbox/SemestreCorrente/LabEngSW/mimicapp-lab-eng-sw/mimicapp-lab-eng-sw.iml" filepath="/media/DADOS/Dropbox/SemestreCorrente/LabEngSW/mimicapp-lab-eng-sw/mimicapp-lab-eng-sw.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mimicapp-lab-eng-sw.iml" filepath="$PROJECT_DIR$/mimicapp-lab-eng-sw.iml" />
     </modules>
   </component>
 </project>
