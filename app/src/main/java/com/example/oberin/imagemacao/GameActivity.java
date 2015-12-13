@@ -14,7 +14,7 @@ public class GameActivity extends ActionBarActivity {
     // Variables for Couter
     private CountDownTimer countDownTimer;
     private boolean timerHasStarted = false;
-    private final long startTime = 1000;
+    private final long startTime = 3000;
     private final long interval = 1000;
     public TextView currentWordText;
     public TextView timerText;
@@ -27,7 +27,7 @@ public class GameActivity extends ActionBarActivity {
         Intent intent = getIntent();
 
 
-        currentWordText = (TextView) this.findViewById(R.id.currentWord);
+        currentWordText = (TextView) this.findViewById(R.id.textResult);
         timerText = (TextView) this.findViewById(R.id.timer);
 
         countDownTimer = new MyCountDownTimer(startTime, interval);

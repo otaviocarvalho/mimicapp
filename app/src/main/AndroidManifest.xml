@@ -32,7 +32,20 @@
             android:label="@string/title_activity_round"
             android:screenOrientation="landscape" >
         </activity>
-
+        <activity
+            android:name=".ScoreboardActivity"
+            android:label="@string/title_activity_scoreboard"
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity android:name=".MainMenuActivity" >
+        </activity>
+        <activity android:name=".MenuCategories" >
+        </activity>
+        <activity
+            android:name=".TutorialActivity"
+            android:label="@string/title_activity_tutorial"
+            android:screenOrientation="landscape" >
+        </activity>
     </application>
 
 </manifest>

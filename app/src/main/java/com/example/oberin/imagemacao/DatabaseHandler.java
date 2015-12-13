@@ -97,6 +97,8 @@ public class DatabaseHandler extends SQLiteOpenHelper{
             db.close();
             return word;
         }
+
+        db.close();
         return null;
     }
 

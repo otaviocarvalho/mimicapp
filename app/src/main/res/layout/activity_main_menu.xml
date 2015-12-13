@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.example.oberin.imagemacao.MainMenuActivity"
+    android:background="#ff9a70ff">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="MimicApp"
+        android:id="@+id/textView2"
+        android:layout_marginTop="99dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Play with Categories"
+        android:id="@+id/button_categories"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Play Random"
+        android:id="@+id/button_random"
+        android:layout_above="@+id/button_settings"
+        android:layout_alignLeft="@+id/button_categories"
+        android:layout_alignStart="@+id/button_categories"
+        android:layout_alignRight="@+id/button_categories"
+        android:layout_alignEnd="@+id/button_categories" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Settings"
+        android:id="@+id/button_settings"
+        android:layout_above="@+id/button_tutorial_screen"
+        android:layout_alignLeft="@+id/button_random"
+        android:layout_alignStart="@+id/button_random"
+        android:layout_alignRight="@+id/button_random"
+        android:layout_alignEnd="@+id/button_random" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Show Tutorial"
+        android:id="@+id/button_tutorial_screen"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/button_settings"
+        android:layout_alignStart="@+id/button_settings"
+        android:layout_marginBottom="60dp"
+        android:layout_alignRight="@+id/button_settings"
+        android:layout_alignEnd="@+id/button_settings" />
+</RelativeLayout>

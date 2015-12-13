@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Get Ready!"
-        android:id="@+id/currentWord"
+        android:id="@+id/textResult"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="81dp" />
@@ -23,6 +23,6 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="3"
         android:id="@+id/timer"
-        android:layout_below="@+id/currentWord"
+        android:layout_below="@+id/textResult"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>
